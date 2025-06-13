@@ -1,4 +1,16 @@
 <!-- @format -->
+<?php
+require 'functions.php';
+$menu = query("SELECT * FROM menu");
+
+
+//tombol cari di tekan
+if (isset($_POST["cari"])) {
+    $menu = cari($_POST["keyword"]);
+}
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,20 +44,25 @@
     <nav class="navbar">
         <a href="#" class="navbar-logo">kopi<span>Q</span>.</a>
 
-
         <div class="navbar-nav">
-            <a href="../database/pesanan.php">Pesanan</a>
+            <a href="../database/pemesanan.php">Pesanan</a>
             <a href="#home">Beranda</a>
             <a href="#about">Tentang Kami</a>
             <a href="#menu">Menu Kami</a>
-            <a href="../php/login.php">Logout</a>
-            <a href=""> <i class="bi bi-cart"></i></a>
-            <input type="text" id="searchInput" onkeyup="searchMenu()" placeholder="Cari menu kopi...">
+            <a href="../php/halamanlogin.php">Logout</a>
+            <a href="../database/hargamenu.php"><i class="bi bi-cart"></i></a>
         </div>
 
+        <div class="navbar-search">
+            <form action="" method="post">
+                <input type="text" name="keyword" autofocus placeholder="Cari menu kopi..." autocomplete="off">
+                <button type="submit" name="cari">Cari</button>
+            </form>
 
-
+            <br>
+        </div>
     </nav>
+
     <!--navbar end-->
 
     <!--hero section start-->

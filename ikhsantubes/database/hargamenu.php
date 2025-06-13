@@ -1,9 +1,9 @@
 <?php
 // koneksi ke database
-$conn = mysqli_connect('localhost', 'root', '', 'pw2024_243040017');
+$conn = mysqli_connect('localhost', 'root', '', 'tubes_pw2024_243040017');
 
 // query ke tabel harga_menu
-$result = mysqli_query($conn, "SELECT * FROM harga_menu");
+$result = mysqli_query($conn, "SELECT * FROM menu");
 
 // ubah datanya ke dalam array
 $rows = [];
@@ -12,7 +12,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 // simpan ke variabel harga_menu
-$harga_menu = $rows;
+$menu = $rows;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,17 +41,16 @@ $harga_menu = $rows;
                 <tr>
                     <th>ID</th>
                     <th>Menu</th>
-                    <th>Jumlah</th>
                     <th>Harga</th>
                     <th>Aksi</th>
+
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($harga_menu as $hm): ?>
+                <?php foreach ($menu as $hm): ?>
                     <tr>
                         <td><?= $hm['id']; ?></td>
                         <td><?= $hm['menu']; ?></td>
-                        <td><?= $hm['jumlah']; ?></td>
                         <td><?= $hm['harga']; ?></td>
                         <td>
                             <a href="edit.php?id=<?= $hm['id']; ?>" class="btn btn-sm btn-primary">Ubah</a>

@@ -1,0 +1,272 @@
+/** @format */
+
+* {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/*color*/
+:root {
+  --body-color: #ffffffd6;
+  --sidebar-color: #fff;
+  --primary-color: #68a4c6d6;
+  --primary-color-light: #ddd;
+  --toggle-color: #ddd;
+  --text-color: #514a4a;
+  /*transition*/
+  --tran-02: all 0.2 ease;
+  --tran-03: all 0.3 ease;
+  --tran-04: all 0.4 ease;
+  --tran-05: all 0.5 ease;
+}
+
+body {
+  height: 100vh;
+  background-color: var(--body-color);
+  transition: var(--tran-04);
+}
+/* Dark mode */
+body.dark {
+  --body-color: #000000d6;
+  --sidebar-color: #000000d6;
+  --primary-color: #292929d6;
+  --primary-color-light: #292929d6;
+  --toggle-color: #fff;
+  --text-color: #ccc;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  padding: 10px 14px;
+  background: var(--primary-color);
+}
+
+/* Sidebar Transition */
+.sidebar {
+  transition: width 0.3s ease, left 0.3s ease;
+  overflow: hidden;
+}
+
+/* Jika sidebar ditutup */
+.sidebar.close {
+  width: 78px;
+}
+
+/* Sidebar text disembunyikan saat close */
+.sidebar.close .text {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar .text {
+  transition: opacity 0.3s ease;
+}
+.menu i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* sidebar css */
+.sidebar .text {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.sidebar .image {
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+}
+.sidebar li {
+  height: 50px;
+  margin-top: 10px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+.sidebar li .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  font-size: 20px;
+}
+.sidebar li .icon,
+.sidebar li .text {
+  color: var(--text-color);
+  transition: var(--tran-02);
+}
+
+.sidebar header {
+  position: relative;
+}
+
+.sidebar .image-text img {
+  width: 40px;
+  border-radius: 6px;
+}
+
+.sidebar header .image-text {
+  display: flex;
+  align-items: center;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.header-text .name {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.header-text .profession {
+  margin-top: -2px;
+  font-size: 12px;
+  color: gray;
+}
+
+/* Toggle button (icon) */
+.sidebar header .toggle {
+  position: absolute;
+  top: 50%;
+  right: -15px;
+  transform: translateY(-50%) rotate(180deg);
+  height: 25px;
+  width: 25px;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 22px;
+  z-index: 100;
+}
+.sidebar .close header .toggle {
+  transform: translateY(-50%);
+}
+body .dark .sidebar header .toggle {
+  transform: rotate(180deg);
+  color: var(--text-color);
+}
+.sidebar .search-box {
+  background: var(--primary-color-light);
+}
+
+.search-box input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary-color-light);
+}
+.sidebar li a {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: var(--tran-04);
+}
+.sidebar li a:hover {
+  background: var(--primary-color);
+}
+.sidebar li a:hover .icon,
+.sidebar li a:hover .text {
+  color: var(--sidebar-color);
+}
+.sidebar .menu-bar {
+  height: calc(100% - 50px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+/*mode gelap*/
+.toggle-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--text-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/*menampilkan databases*/
+.home {
+  position: relative;
+  height: 100vh;
+  left: 250px;
+  width: calc(100% - 250px);
+  background: var(--body-color);
+  transition: var(--tran-05);
+}
+
+.sidebar .close ~ .home {
+  left: 88px;
+  width: calc(100% - 88px);
+}
+.home .text {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--text-color);
+  padding: 8px 40px;
+}

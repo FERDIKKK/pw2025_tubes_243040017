@@ -1,16 +1,12 @@
 <?php
-
 function koneksi()
 {
-    $conn = mysqli_connect('localhost', 'root', '', 'pw2024_243040017');
-    return $conn;
+    return mysqli_connect('localhost', 'root', '', 'tubes_pw2024_243040017');
 }
 
 function query($query)
 {
     $conn = koneksi();
-    $conn = koneksi();
-
     $result = mysqli_query($conn, $query);
 
     $rows = [];
@@ -22,17 +18,14 @@ function query($query)
 
 function tambah($data)
 {
-
     $conn = koneksi();
 
     $nama = htmlspecialchars($data["nama"]);
-    $email = htmlspecialchars($data["email"]);
     $password = htmlspecialchars($data["password"]);
+    $email = htmlspecialchars($data["email"]);
 
-
-    $query = "INSERT INTO users (nama, email, password)
-    VALUES
-    ('$nama', '$email', '$password')";
+    $query = "INSERT INTO users (nama, password, email)
+              VALUES ('$nama', '$password', '$email')";
 
     mysqli_query($conn, $query);
 
@@ -51,19 +44,16 @@ function ubah($data)
 {
     $conn = koneksi();
 
-    $id = $data("id");
-
+    $id = htmlspecialchars($data["id"]);
     $nama = htmlspecialchars($data["nama"]);
-    $email = htmlspecialchars($data["email"]);
     $password = htmlspecialchars($data["password"]);
+    $email = htmlspecialchars($data["email"]);
 
     $query = "UPDATE users SET 
                 nama = '$nama',
+                password = '$password'
                 email = '$email',
-                password = '$password',
-                WHERE id = $id
-                ";
-
+              WHERE id = $id";
 
     mysqli_query($conn, $query);
 
@@ -72,26 +62,69 @@ function ubah($data)
 
 function registrasi($data)
 {
-
     $conn = koneksi();
 
     $nama = strtolower(stripslashes($data["nama"]));
-    $email = mysqli_real_escape_string($conn, $data["email"]);
     $password = mysqli_real_escape_string($conn, $data["password"]);
+    $email = mysqli_real_escape_string($conn, $data["email"]);
 
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     $result = mysqli_query($conn, "SELECT nama FROM users WHERE nama = '$nama'");
-
     if (mysqli_fetch_assoc($result)) {
         echo "<script>
-                alert('Username Sudah Ada Yang Pakai');
-                document.location.href = 'registrasi.php';
-            </script>";
+                alert('Username sudah digunakan!');
+              </script>";
         return false;
     }
 
-    mysqli_query($conn, "INSERT INTO users (nama, email, password) VALUES ('$nama', '$password', '$email')");;
+    mysqli_query($conn, "INSERT INTO users (nama, password, email) 
+                         VALUES ('$nama', '$password', '$email')");
 
-    mysqli_affected_rows($conn);
+    return mysqli_affected_rows($conn);
+}
+
+function login($data)
+{
+    global $conn;
+
+    $username = htmlspecialchars($data['username']);
+    $password = $data['password'];
+
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE nama = '$username'");
+
+    if (mysqli_num_rows($result) === 1) {
+        $user = mysqli_fetch_assoc($result);
+
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['login'] = true;
+            $_SESSION['username'] = $user['nama'];
+
+            // Jika user adalah admin, beri flag khusus
+            if ($user['nama'] === 'admin') {
+                return ['success' => true, 'admin' => true];
+            }
+
+            return ['success' => true];
+        } else {
+            return ['error' => true, 'pesan' => 'Password salah!'];
+        }
+    } else {
+        return ['error' => true, 'pesan' => 'Username tidak ditemukan!'];
+    }
+}
+
+function cari($keyword)
+{
+    $conn = koneksi(); // pastikan fungsi koneksi() ada
+    $keyword = htmlspecialchars($keyword);
+    $query = "SELECT * FROM menu 
+              WHERE nama LIKE '%$keyword%'";
+
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows;
 }

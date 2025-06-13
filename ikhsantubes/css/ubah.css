@@ -1,52 +1,46 @@
 body {
-  background-color: rgba(210, 95, 29, 0.8);
+  background-image: linear-gradient(#000080, #2121ae, #3434c0);
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   margin: 0;
+  font-family: "Oswald", sans-serif;;
 }
 
 .container {
-  background-color: rgba(106, 95, 228, 0.7);
+  background-color: white;
   padding: 2rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 20rem;
-    box-shadow: 0 4px 6px 12px rgba(250, 32, 32, 0.297);
-
 }
 
-.title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+.tittle h1 {
   text-align: center;
 }
 
-img .logo {
-  display: block;
-  margin: 0 auto 1rem;
-  height: 100px;
-  width: 100px;
+.form {
+  width: 20rem;
+  background-color: white;
 }
 
-.form-group {
-  margin-bottom: 1rem;
+form {
+  margin: 20px auto;
 }
 
-.form-group label {
+.form input {
+  width: 92%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  outline: none;
+}
+
+.form label {
   display: block;
   color: black;
   margin-bottom: 0.5rem;
-}
-
-.form-group input {
-  width: 92%;
-  padding: 0.75rem;
-  border: 1px solid #1a58b7;
-  border-radius: 0.5rem;
-  outline: none;
 }
 
 .form-group input:focus {
@@ -54,7 +48,7 @@ img .logo {
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
 }
 
-.submit-btn {
+button {
   width: 100%;
   background-color: #3b82f6;
   color: #ffffff;
@@ -62,13 +56,14 @@ img .logo {
   border-radius: 0.5rem;
   border: none;
   cursor: pointer;
+  margin-top: 20px;
 }
 
-.submit-btn:hover {
+button:hover {
   background-color: skyblue;
 }
 
-.error-message {
-  color: red;
-  margin-top: 1rem;
+.berhasil {
+  margin-top: 20px;
+  font-size: 15px;
 }

@@ -1,15 +1,15 @@
 <?php
 // koneksi ke database
-$conn = mysqli_connect('localhost', 'root', '', 'pw2024_243040017');
+$conn = mysqli_connect('localhost', 'root', '', 'tubes_pw2024_243040017');
 // query ke tabel stock_barang
-$result = mysqli_query($conn, "SELECT * FROM stock_barang");
+$result = mysqli_query($conn, "SELECT * FROM users");
 // ubah datanya ke dalam array
 $rows = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $rows[] = $row;
 }
 // simpan ke variabel stock_barang
-$stock_barang = $rows;
+$users = $rows;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,7 @@ $stock_barang = $rows;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Barang</title>
+    <title>Users</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -26,7 +26,7 @@ $stock_barang = $rows;
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-warning mb-4">
         <div class="container">
-            <a class="navbar-brand" href="#">Stock Barang</a>
+            <a class="navbar-brand" href="#">Users</a>
         </div>
     </nav>
 
@@ -35,17 +35,19 @@ $stock_barang = $rows;
             <thead class="table-primary">
                 <tr>
                     <th>ID</th>
-                    <th>Barang</th>
-                    <th>Jumlah</th>
+                    <th>nama</th>
+                    <th>password</th>
+                    <th>email</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($stock_barang as $sb): ?>
+                <?php foreach ($users as $sb): ?>
                     <tr>
                         <td><?= $sb['id']; ?></td>
-                        <td><?= $sb['barang']; ?></td>
-                        <td><?= $sb['jumlah']; ?></td>
+                        <td><?= $sb['nama']; ?></td>
+                        <td><?= $sb['password']; ?></td>
+                        <td><?= $sb['email']; ?></td>
                         <td>
                             <a href="edit.php?id=<?= $sb['id']; ?>" class="btn btn-sm btn-primary">Ubah</a>
                             <a href="delete.php?id=<?= $sb['id']; ?>" class="btn btn-sm btn-danger"
