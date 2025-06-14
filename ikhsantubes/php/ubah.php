@@ -1,93 +1,64 @@
 <?php
+require 'functions.php';
 
-require '../functions.php';
-
+// Ambil ID dari URL
 $id = $_GET["id"];
 
-$art = query("SELECT * FROM art WHERE id = $id")[0];
+// Ambil data menu berdasarkan ID
+$menu = query("SELECT * FROM menu WHERE id = $id")[0];
 
+// Jika tombol submit ditekan
 if (isset($_POST["submit"])) {
-    if (ubah($_POST) > 0) {
-        header("Location: ../community/community.php");
+    if (ubahMenu($_POST) > 0) {
+        header("Location: hargamenu.php");
         exit;
     } else {
-        $gagal = "Data gagal ditambahkan";
+        $gagal = "Data gagal diubah!";
     }
 }
 ?>
 
-
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit</title>
+    <title>Ubah Data Menu</title>
     <link rel="stylesheet" href="ubah.css">
     <link rel="stylesheet" href="tambah.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="form">
-            <div class="tittle">
-                <h1>Ubah Data</h1>
-            </div>
+    <div class="container mt-5">
+        <div class="card shadow p-4">
+            <h1 class="mb-4 text-center">Ubah Data Menu</h1>
 
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="" method="post">
+                <input type="hidden" name="id" value="<?= $menu['id']; ?>">
 
-                <input type="hidden" name="id" value="<?= $art['id']; ?>">
-                <input type="hidden" name="gambarLama" value="<?= $art['gambar']; ?>">
-
-                <label for="nama">
-                    Input nama :
-                </label>
-                <input type="text" name="nama" id="nama" required value="<?= $art['nama']; ?>">
-
-                <label for="password">
-                    Input password :
-                </label>
-                <input type="password" name="password" id="password" required>
-
-                <label for="email">
-                    Input Deskripsi :
-                </label>
-                <input type="text" name="email" id="email" required value=" <?= $art['email']; ?>">
-
-                <button type="submit" name="submit">Ubah Data</button>
-
-                <div class="keterangan">
-                    <div class="berhasil">
-                        <?php
-                        if (isset($berhasil)) {
-                            echo $berhasil;
-                        }
-                        ?>
-                    </div>
-                    <div class="gagal">
-                        <?php
-                        if (isset($gagal)) {
-                            echo $gagal;
-                        }
-                        ?>
-                    </div>
+                <div class="mb-3">
+                    <label for="menu" class="form-label">Nama Menu</label>
+                    <input type="text" class="form-control" id="menu" name="menu" required value="<?= $menu['menu']; ?>">
                 </div>
 
+                <div class="mb-3">
+                    <label for="harga" class="form-label">Harga</label>
+                    <input type="number" class="form-control" id="harga" name="harga" required value="<?= $menu['harga']; ?>">
+                </div>
 
+                <button type="submit" name="submit" class="btn btn-success">Ubah Data</button>
+
+                <?php if (isset($gagal)): ?>
+                    <div class="alert alert-danger mt-3"><?= $gagal; ?></div>
+                <?php endif; ?>
+            </form>
         </div>
-
     </div>
-
-
-    </form>
 
 </body>
 

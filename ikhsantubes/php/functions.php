@@ -51,8 +51,8 @@ function ubah($data)
 
     $query = "UPDATE users SET 
                 nama = '$nama',
-                password = '$password'
-                email = '$email',
+                password = '$password',
+                email = '$email'
               WHERE id = $id";
 
     mysqli_query($conn, $query);
@@ -72,9 +72,7 @@ function registrasi($data)
 
     $result = mysqli_query($conn, "SELECT nama FROM users WHERE nama = '$nama'");
     if (mysqli_fetch_assoc($result)) {
-        echo "<script>
-                alert('Username sudah digunakan!');
-              </script>";
+        echo "<script>alert('Username sudah digunakan!');</script>";
         return false;
     }
 
@@ -86,7 +84,7 @@ function registrasi($data)
 
 function login($data)
 {
-    global $conn;
+    $conn = koneksi();
 
     $username = htmlspecialchars($data['username']);
     $password = $data['password'];
@@ -100,7 +98,6 @@ function login($data)
             $_SESSION['login'] = true;
             $_SESSION['username'] = $user['nama'];
 
-            // Jika user adalah admin, beri flag khusus
             if ($user['nama'] === 'admin') {
                 return ['success' => true, 'admin' => true];
             }
@@ -116,10 +113,9 @@ function login($data)
 
 function cari($keyword)
 {
-    $conn = koneksi(); // pastikan fungsi koneksi() ada
+    $conn = koneksi();
     $keyword = htmlspecialchars($keyword);
-    $query = "SELECT * FROM menu 
-              WHERE nama LIKE '%$keyword%'";
+    $query = "SELECT * FROM menu WHERE nama LIKE '%$keyword%'";
 
     $result = mysqli_query($conn, $query);
     $rows = [];
@@ -127,4 +123,32 @@ function cari($keyword)
         $rows[] = $row;
     }
     return $rows;
+}
+
+// Fungsi untuk menghapus menu
+function hapusMenu($id)
+{
+    $conn = koneksi();
+    $id = (int) $id;
+    $query = "DELETE FROM menu WHERE id = $id";
+    return mysqli_query($conn, $query);
+}
+
+
+function ubahMenu($data)
+{
+    $conn = koneksi();
+
+    $id = (int)$data['id']; // amankan ID
+    $menu = htmlspecialchars($data['menu']);
+    $harga = htmlspecialchars($data['harga']);
+
+    $query = "UPDATE menu SET 
+                menu = '$menu',
+                harga = '$harga'
+              WHERE id = $id";
+
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
 }

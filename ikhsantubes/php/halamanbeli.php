@@ -53,12 +53,9 @@ if (isset($_POST["cari"])) {
             <a href="../database/hargamenu.php"><i class="bi bi-cart"></i></a>
         </div>
 
-        <div class="navbar-search">
-            <form action="" method="post">
-                <input type="text" name="keyword" autofocus placeholder="Cari menu kopi..." autocomplete="off">
-                <button type="submit" name="cari">Cari</button>
-            </form>
+        <div class="search-input">
 
+            <input type="text" autofocus placeholder="Cari menu kopi...">
             <br>
         </div>
     </nav>

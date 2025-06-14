@@ -53,9 +53,10 @@ $menu = $rows;
                         <td><?= $hm['menu']; ?></td>
                         <td><?= $hm['harga']; ?></td>
                         <td>
-                            <a href="edit.php?id=<?= $hm['id']; ?>" class="btn btn-sm btn-primary">Ubah</a>
-                            <a href="delete.php?id=<?= $hm['id']; ?>" class="btn btn-sm btn-danger"
+                            <a href="ubah.php?id=<?= $hm['id']; ?>" class="btn btn-sm btn-primary">Ubah</a>
+                            <a href="functions.php?id=<?= $hm['id']; ?>" class="btn btn-sm btn-danger"
                                 onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
+
                         </td>
                     </tr>
                 <?php endforeach; ?>

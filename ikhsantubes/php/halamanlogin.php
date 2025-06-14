@@ -23,6 +23,67 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+    <style>
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background-image: url(../css/img/kopiQ_background.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 30%;
+            bottom: 0;
+            background: linear-gradient(0deg,
+                    rgba(1, 1, 3, 1) 8%,
+                    rgba(255, 255, 255, 0) 50%);
+        }
+
+        .hero .content {
+            padding: 1.4rem 7%;
+            max-width: 60rem;
+        }
+
+        .hero .content h1 {
+            font-size: 5em;
+            color: #bdbdbd;
+            text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+            line-height: 1.2;
+        }
+
+        .hero .content h1 span {
+            color: var(--primary);
+        }
+
+        .hero .content p {
+            font-size: 1.6rem;
+            margin-top: 10px;
+            line-height: 1.4;
+            font-weight: 100;
+            text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+            color: var(--bg);
+            font-weight: 300;
+        }
+
+        .hero .content .cta {
+            margin-top: 1rem;
+            display: inline-block;
+            padding: 1rem 3rem;
+            font-size: 1.4rem;
+            color: #fff;
+            background-color: var(--primary);
+            border-radius: 8px;
+            box-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+        }
+    </style>
 
     <title>Halaman Login utama</title>
 </head>
@@ -45,7 +106,7 @@
     <!--navbar end-->
 
     <!--hero section start-->
-    <section class="hero" id="home">
+    <section class="hero">
         <main class="content">
             <h1>Selamat datang di <span>KopiQ</span></h1>
             <p>

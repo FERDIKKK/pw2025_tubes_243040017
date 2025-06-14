@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="../database/hargamenu.php">
+                    <a href="../php/hargamenu.php">
                         <i class="bi bi-list"></i>
                         <span class="text nav-text">Harga Menu</span>
                     </a>
